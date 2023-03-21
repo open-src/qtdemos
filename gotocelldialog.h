@@ -1,21 +1,31 @@
-//这里通过多重继承使用了gotocell.ui文件转换后的Ui::GoToCellDialog类，
-//但这不是推荐的方式，这使得该类的头文件更为复杂
+//author:stardust
+//date: 2023-03-19
+//采用类成员的方式来实现GoToCellDialog类和Ui::Bridge类的组合关系
+//Ui::Bridge类存放在ui_gotocell.h中，该头文件是通过编译gotocell.ui文件自动生成的。
 #ifndef GOTOCELLDIALOG_H
 #define GOTOCELLDIALOG_H
 
 #include <QDialog>
 
-#include "ui_gotocell.h"
+QT_BEGIN_NAMESPACE
+namespace Ui { class Bridge; }
+QT_END_NAMESPACE
 
-class GoToCellDialog : public QDialog, public Ui::GoToCellDialog
+
+class GoToCellDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    GoToCellDialog(QWidget * parent = nullptr);
-
+    GoToCellDialog(QWidget *parent = nullptr);
+    ~GoToCellDialog();
+    virtual void reject() override;  //override the QDialog::reject();
+    virtual void accept() override;
 private slots:
     void on_lineEdit_textChanged();
-};
 
+private:
+    Ui::Bridge *_ui; // GoToCellDialog对象与其资源对象_ui之间通过指针的方式实现了组合关系
+                     // 由于Qt对象不允许复制，所以只需要对_ui资源对象在析构函数中析构即可
+};
 #endif // GOTOCELLDIALOG_H
