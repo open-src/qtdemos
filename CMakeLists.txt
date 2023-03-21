@@ -11,7 +11,8 @@ qt_add_executable(gotocell)
 target_sources(gotocell
     PRIVATE
         main.cpp
-        bheader.ui
+        gotocelldialog.cpp gotocelldialog.h
+        gotocell.ui
         
     PUBLIC
         
