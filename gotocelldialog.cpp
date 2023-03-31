@@ -26,8 +26,8 @@ void GoToCellDialog::on_lineEdit_textChanged()
 //
 {
     _ui->okButton->setEnabled(_ui->lineEdit->hasAcceptableInput());
-    qDebug()<<"on_lineEdit_textChanged."; //qDebug()函数会返回一个默认的，用于输出调试信息的输出流对象,类型为QDebug
-                                          //该流对象会自动在每个输出项之间放一个空格，并在末尾输出一个换行符。它支持许多c++和Qt类型。
+    qDebug()<<"on_lineEdit_textChanged."; //qDebug()函数会返回一个类型为QDebug的，用于输出调试信息的输出流对象。
+                                          //该流对象会自动在每个输出项之间放一个空格，并在最后输出项之后输出一个换行符，它支持许多c++和Qt类型。
 }
 
 void GoToCellDialog::reject(){
